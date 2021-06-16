@@ -9,7 +9,8 @@ import CenteredContainer from '../authentication/CenteredContainer'
 const INITIAL_STATE = {
     name: "",
     email: "",
-    password: ""
+    password: "",
+    blogName: "",
 }
 
 
@@ -20,12 +21,12 @@ function Login(props) {
     const [firebaseError, setFirebaseError] =  useState(null)
 
     async function authenticateUser() {
-        const { name, email, password } = values
+        const { name, email, password, blogName } = values
 
         try {
             login
                 ? await firebase.login(email, password)
-                : await firebase.register(name, email, password)
+                : await firebase.register(name, email, password, blogName)
             props.history.push('/')
         } catch(err) {
             console.error('Erro de autenticação', err)
@@ -43,15 +44,26 @@ function Login(props) {
             <Form.Group id="name">
               {!login && (
                 <>
-                <Form.Label>Nome</Form.Label>
+                <Form.Label>Your name</Form.Label>
                 <Form.Control
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.name}
                 type="text"
-                placeholder="Seu nome"
+                placeholder="your name"
                 autoComplete="off"
                 name="name" 
+                className="input" />
+                <br></br>
+                <Form.Label>your blog's name</Form.Label>
+                <Form.Control
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.blogName}
+                type="text"
+                placeholder="blog name"
+                autoComplete="off"
+                name="blogName" 
                 className="input" />
                 </>
                 )}
@@ -64,7 +76,7 @@ function Login(props) {
                 onBlur={handleBlur}
                 value={values.email}
                 type="email"
-                placeholder="Seu email"
+                placeholder="your email"
                 autoComplete="off"
                 name="email"
                 className={errors.email ? 'error-input' : "input"} />
@@ -78,7 +90,7 @@ function Login(props) {
                 onBlur={handleBlur}
                 value={values.password}
                 type="password"
-                placeholder="Escolha uma senha segura"
+                placeholder="chose a secure password"
                 name="password"
                 className={errors.password ? "error.input" : "input"} />
             </Form.Group>

@@ -10,13 +10,28 @@ class Firebase {
         this.db = app.firestore()
     }
 
-    async register(name, email, password){
+    async register(name, email, password, blogName){
         const newUser = await this.auth.createUserWithEmailAndPassword(
             email, password
         )
 
+        const newPost = {
+            blogName: blogName,
+            name: name,
+            email: email,
+            profileImg: "",
+            created: Date.now(),
+            followCount: 0,
+            pro: 0,
+            verified: 0,
+            follows: [],
+            comments: [],
+        }
+        firebase.db.collection('users').add(newPost)
+
         return await newUser.user.updateProfile({
             displayName: name,
+            blogName: blogName
         })
     }
 

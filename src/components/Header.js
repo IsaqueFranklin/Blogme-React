@@ -17,14 +17,13 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/">Hacker News Brasil</Nav.Link>
-                <Nav.Link href="/">Recentes</Nav.Link>
+                <Nav.Link href="/">Blogme</Nav.Link>
                 <Nav.Link href="/top">Top</Nav.Link>
-                <Nav.Link href="/search">Pesquisar</Nav.Link>
+                <Nav.Link href="/search">Search</Nav.Link>
                 {user && (
                     <>
                         <Nav.Link href="/create" className="header-link">
-                        Criar link
+                        Create
                         </Nav.Link>
                     </>
                     )}

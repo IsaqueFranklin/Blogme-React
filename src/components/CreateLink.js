@@ -50,9 +50,8 @@ function CreateLink(props) {
 
     return (
         <CenteredContainer>
-        <Card className="midia">
-            <Card.Body className="midia2">
-            <h2 className="titulo">Criando seu link</h2>
+            <h2 className="titulo">Publishing your post</h2>
+            <br></br>
             <Form onSubmit={handleCreateLink} className="flex flex-column">
 
                 <Form.Group id="Post">
@@ -61,19 +60,20 @@ function CreateLink(props) {
                     onChange={handleChange}
                     values={values.title}
                     name="title"
-                    placeholder="Descrição do seu link"
+                    placeholder="title"
                     autoComplete="off"
                     type="text"
                     className={errors.title && 'error-input'} />
                 </Form.Group>
                 {errors.title && <p className="error-text">{errors.title}</p>}
+                <br></br>
                 <Form.Group id="thumb">
                     <Form.Label>Post Thumb</Form.Label>
                     <Form.Control
                     onChange={handleChange}
                     values={values.thumbImg}
                     name="thumbImg"
-                    placeholder="Aqui vai seu link"
+                    placeholder="Post image"
                     autoComplete="off"
                     type="text"
                     className={errors.thumbImg && 'error-input'} />
@@ -98,8 +98,6 @@ function CreateLink(props) {
                     Publish
                 </button>
             </Form>
-            </Card.Body>
-        </Card>
         </CenteredContainer>
     )
 }
