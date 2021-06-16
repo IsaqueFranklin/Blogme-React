@@ -2,7 +2,7 @@ import React, { useContext} from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
-import { Form, Card, Button, Alert, Container } from 'react-bootstrap'
+import { Form, Card, Button, Alert, Container, Row, Col } from 'react-bootstrap'
 
 function PostContainer({ post, showCount, history }) {
     
@@ -37,39 +37,38 @@ function PostContainer({ post, showCount, history }) {
 
     return (
         <Container className="cont">
-            <Card className="links cardColor">
-            <Card.Body>
-            <div className="flex items-start mt2">
+            <Card className="cardposts left">
+            <Row>
+            <Col md="auto">
+                <img src={post.thumbImg} className="ig" />
+            </Col>
+            <Col md="auto">
+                <Card.Body className="">
                 <div className="">
-                        <div className="">
-                            {showCount && <span className="gray"></span>}
-                            <h5 className="title">{post.title}</h5>
-                            {" "}
-                            <small>by {post.postedBy.name}</small>
-                            {/*<span className="link">({getDomain(link.url)})</span>*/}
-                            <br></br>
-                            <small className="paragraph">{post.voteCount} likes</small>{" "}
-                            <small>{distanceInWordsToNow(post.created)} ago</small>
-                        </div>
-                        <div className="social">
-                            <span className="like" onClick={handleVote}>like</span>{"  "}
-                            <Link to={`/post/${post.id}`} className="link">
-                                {post.comments.length > 0
-                                ? `${post.comments.length} comentários`
-                                : "Ver comentários"}
-                            </Link>
-                            {postedByAuthUser && (
-                                <>
-                                {" "}
-                                <span className="delete-button" onClick={handleDeleteLink}>
-                                    Excluir
-                                </span>
-                                </>
-                            )}
-                        </div>
+                    <div className="left">
+                            <div className="">
+                                <h5 className="title">{post.title}</h5>{" "}
+                                <small>by {post.postedBy.name}</small>{" | "}
+        
+                                <small onClick={handleVote}>{post.voteCount} stars  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+gvaeTAAADE0lEQVRIic2Uv28cRRTHP2/P5nbWjm9nnZ07giUMSiwUCxCgFAQFBURQivwJaWhooUCicSJL0NBAqKLQQERQUGgipaBIiShAAoTiNAeSQ0GIf+BbJ2fnSHLzUtxi3V2W3BlhiSetNHrz/b7Pm9mZgf9rhNadCa07s6OQcuJeN9apsU7LiTuyHW+wLbEy1zWe3xFQGNdeAQ4Ba/l3MM/9tyCR9kkAVflIlVN57sTQ/mFEJnEHUb4FsrLeeSILAm90ZBFIFH251Vj5ZlCNoVYkvvM/VPkwy7KMtbWbqnzcKSBzD3fnNYrgYaX6uJZ0X6A6o8jTAm8CWcjd6UajsQ5gra20GL0GxAqfCHrFi9SlLb+01pd+A3wvaGrKRJt33lV4RpUZgb1AuZ+uKida2dL73bkwrs6J6HsFzf6l8KsIdfX83IqjD2QsSY96la/7hNdB64rURagH6NWNtZXLQLtPVxpL0iMeme00qTMgM8Ceni0SjgKMGusu5hexFca1wwUdbivCuHbYWNfKa14ERrc6M9Z9kU9kJnEv/ltIVNn9grHuT2Odmth91Q3phn2ew5rbuYx/h7Hupci69U6N6oUiyBYssu5sDtsIK9VXh4WENj1krLvZ8aZfAiODPD2w8kS6d5ChPJHuM9ZtGOs0su4sUOrXFF3Y9mZj+Q1gEYgkKE0NAklQegyIgMXc2386H/oy1ABG7nF1EGi0HSzkw0f5h2etEFSeSJ8EDMpSs3ljZRDo1q3rqwjLQFiuuOmhQaUg2J/P9qwmmqwdMDa9ZGx6KZqsHeizLQCURGaHBnnxuVivADwyOfmUsdUL6v13IMdAjqn330exuzwWu2c7Wlno9fZG4REUZD+AKBtR4j5Tz3HQEtAU0VMAqvK2Cq8p/BAl7hzqf1dky/tgzYIw1v0IPNeVuqvwaVDy85urq38A7Nq1Z/e9kfY7oG8BYZf2p9uN5eeHBTWBMaAtwjnvg/lWduNakTaMa9NB4OdVOU7n/mzcbiyPF2kfNFt32tj0/HhSK9zvohhParPGpudD604P69mRuA8RiAEixdfBEAAAAABJRU5ErkJggg==" className="star" /></small>{" "}
+                           
+                                {" "}<Link to={`/post/${post.id}`} className="">
+                                    <button style={{ padding: 8 }}>Ler agora</button>
+                                </Link>
+                                {postedByAuthUser && (
+                                    <>
+                                    {" "}
+                                    <span className="delete" onClick={handleDeleteLink}>
+                                        Delete
+                                    </span>
+                                    </>
+                                )}
+                            </div>
+                    </div>
                 </div>
-            </div>
-        </Card.Body>
+                </Card.Body>
+            </Col>
+        </Row>
         </Card>
     </Container>
     )

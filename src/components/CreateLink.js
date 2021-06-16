@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import useFormValidation from '../authentication/useFormValidation'
 import validateCreateLink from '../authentication/validateCreateLink'
 import FirebaseContext from '../firebase/context'
-import { Form, Card } from 'react-bootstrap'
+import { Form, Card, Container } from 'react-bootstrap'
 import CenteredContainer from '../authentication/CenteredContainer'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -49,7 +49,9 @@ function CreateLink(props) {
 
 
     return (
-        <CenteredContainer>
+        <Container>
+            <br></br>
+            <br></br>
             <h2 className="titulo">Publishing your post</h2>
             <br></br>
             <Form onSubmit={handleCreateLink} className="flex flex-column">
@@ -68,12 +70,12 @@ function CreateLink(props) {
                 {errors.title && <p className="error-text">{errors.title}</p>}
                 <br></br>
                 <Form.Group id="thumb">
-                    <Form.Label>Post Thumb</Form.Label>
+                    <Form.Label>Post Thumb Url</Form.Label>
                     <Form.Control
                     onChange={handleChange}
                     values={values.thumbImg}
                     name="thumbImg"
-                    placeholder="Post image"
+                    placeholder="Post image Url"
                     autoComplete="off"
                     type="text"
                     className={errors.thumbImg && 'error-input'} />
@@ -83,6 +85,7 @@ function CreateLink(props) {
                 <Form.Group id="content">
                     <Form.Label>Content</Form.Label>
                     <CKEditor
+                    style={{ height: 400, }}
                     className=""
                     editor={ ClassicEditor }
                     data={textComment}
@@ -98,7 +101,7 @@ function CreateLink(props) {
                     Publish
                 </button>
             </Form>
-        </CenteredContainer>
+        </Container>
     )
 }
 

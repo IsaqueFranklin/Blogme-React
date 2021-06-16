@@ -11,8 +11,8 @@ function Header() {
 
     return (
             <Navbar collapseOnSelect variant="light" fixed='top' expand="lg" sticky="top" style={{backgroundColor: "#fff"}}>
-            <Navbar.Brand href="#home">
-                <img src="" alt="" className="logo" />
+            <Navbar.Brand href="/">
+                <img src="/img/montanhas.png" alt="logo" className="logo" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

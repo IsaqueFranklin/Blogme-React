@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^4.6.0",
+    "ckeditor4-react": "^2.0.0-rc.1",
     "date-fns": "^2.22.1",
     "firebase": "^8.6.7",
     "react": "^17.0.2",

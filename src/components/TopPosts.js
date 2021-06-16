@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../firebase/context'
 import PostContainer from './PostContainer'
+import { Container } from 'react-bootstrap'
 
 
 function TopPosts(props) {
@@ -42,14 +43,14 @@ function TopPosts(props) {
 
 
     return (
-        <>
+        <Container className="cont">
         <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
       {/* renderLinks() ao invés de usar links */}
       {posts.map((post) => (
         <PostContainer key={post.id} showCount={true} post={post} />
       ))}
     </div>
-    </>
+    </Container>
     )
 }
 

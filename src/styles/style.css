@@ -1,4 +1,156 @@
+.logo {
+    height: 30px;
+    width: 30px;
+}
+
 button {
+    padding: 10px 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #091116;
+    border: transparent;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #091116;
+}
+
+@media (max-width: 768px) {
+    .links {
+        padding: 0px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    img {
+        max-height: 200px;
+        max-width: 295px;
+    }
+
+    .ig {
+        margin-left: 4px;
+        margin-top: 4px;
+        height: 200px;
+        width: 320px;
+        border-radius: 8px;
+        align-items: center;
+    }
+}
+
+
+@media (min-width: 768px) {
+    img {
+        max-height: 300px;
+        max-width: 400px;
+    }
+
+    .ig {
+        height: 120px;
+        width: 160px;
+        border-radius: 8px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .links {
+        padding: 0px;
+        margin-top: 10px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    img {
+        max-height: 600px;
+        max-width: 600px;
+    }
+
+    .ig {
+        height: 120px;
+        width: 160px;
+        border-radius: 8px;
+    }
+}
+
+.commentEditor {
+    max-width: 400px;
+    min-height: 400px;
+}
+
+.cardposts {
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #091116;
+}
+
+a:hover{
+    margin: 1px solid #091116;
+}
+
+.postImg {
+    height: 150px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.cont {
+    align-items: center;
+    justify-content: center;
+}
+
+.star {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.star2 {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.footer {
+    border: transparent;
+    border-radius: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    background-color: #091116;
+    color: white;
+}
+
+.delete {
+    color: red;
+    cursor: pointer;
+}
+
+.homecard {
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.blogmelogo {
+    height: 250px;
+    width: 250px;
+    align-self: center;
+}
+
+.button2 {
     padding: 10px 30px;
     margin-right: 10px;
     margin-top: 10px;
@@ -6,10 +158,23 @@ button {
     border: transparent;
     border-radius: 8px;
     font-size: 12px;
-    color: #0a0a0a;
+    color: #091116;
 }
 
-button:hover {
+.button2:hover{
     background-color: #091116;
     color: #fff;
+}
+
+.banner {
+    height: 50%;
+    border: transparent;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+
+.cardhomefinal {
+    padding: 20px 30px;
 }
