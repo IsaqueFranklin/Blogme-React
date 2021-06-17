@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../firebase/context'
 import PostContainer from './PostContainer'
-import { Container } from 'react-bootstrap'
-
+import { Container, Card, Row, Col } from 'react-bootstrap'
+import Footer from './Footer'
 
 function TopPosts(props) {
 
@@ -43,14 +43,33 @@ function TopPosts(props) {
 
 
     return (
+      <>
         <Container className="cont">
-        <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
-      {/* renderLinks() ao invés de usar links */}
-      {posts.map((post) => (
-        <PostContainer key={post.id} showCount={true} post={post} />
-      ))}
-    </div>
-    </Container>
+        <Container  className="cont">
+          <br></br>
+          <br></br>
+          <h3><small>Best ranked posts of the day by number of stars</small></h3>
+          <br></br>
+        </Container>
+          <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
+            {/* renderLinks() ao invés de usar links */}
+            {posts.map((post) => (
+              <PostContainer key={post.id} showCount={true} post={post} />
+            ))}
+          </div>
+          <Container>
+          <Card className="homecard">
+            <Card.Body>
+              <br></br>
+              <h4>Wanna see the recent posts?</h4>
+              <p>You wanna see what people are posting and commenting right now?</p>
+              <a href="/"><button>Recent posts</button></a>
+            </Card.Body>
+          </Card>
+          </Container>
+        </Container>
+        <Footer />
+      </>
     )
 }
 

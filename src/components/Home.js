@@ -49,7 +49,7 @@ function Home(props) {
             <Container>
             <Card className="homecard">
                 <Card.Body>
-                <h3>this is Blogme</h3>
+                <h3>This is Blogme</h3>
                 <br></br>
                 <Row>
                     <Col>
@@ -75,7 +75,7 @@ function Home(props) {
             <br></br>
         </div>
     <Container>
-        <p>Do you wanna see best ranked posts?</p>
+        <p>Do you wanna see the best ranked posts?</p>
         <a href="/top"><button>See top posts</button></a>
         <br></br>
         <br></br>

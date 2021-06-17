@@ -8,8 +8,10 @@ import useAuth from './authentication/useAuth'
 import Header from './components/Header'
 import CreateLink from './components/CreateLink'
 import Home from './components/Home'
+import Search from './components/Search'
 import TopPosts from './components/TopPosts'
 import ReadPost from './components/ReadPost'
+import EditPost from './components/EditPost'
 import './styles/style.css'
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
             <Route path='/create' component={CreateLink} />
             <Route path='/home' component={Home} />  
             <Route path='/top' component={TopPosts} />
+            <Route path='/search' component={Search} />
             <Route path='/post/:postId' component={ReadPost} />
+            <Route path='/edit/:postId' component={EditPost} />
           </Switch>
         </div>
       </div>
