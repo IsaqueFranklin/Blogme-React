@@ -41,7 +41,7 @@ function Post({ post, showCount, history }) {
             <div className="links">
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
                 <h3>{post.title}</h3>
-                <small>By {post.postedBy.name}</small>
+                <small>By <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></small>
                 <br></br>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
@@ -50,21 +50,9 @@ function Post({ post, showCount, history }) {
             </div>
             <hr></hr>
             <div className="links" dangerouslySetInnerHTML={{ __html: post.text }} />
+            <hr></hr>
             <br></br>
             <br></br>
-            <div className="links">
-                <hr></hr>
-                <br></br>
-                {postedByAuthUser && (
-                    <>
-                    <span className="delete-button" onClick={handleDeleteLink}>
-                        delete
-                    </span>
-                    </>
-                )}
-            </div>
-          <br></br>
-          <br></br>
         </Container>
     )
 }

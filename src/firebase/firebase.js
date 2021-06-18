@@ -27,6 +27,7 @@ class Firebase {
             follows: [],
             comments: [],
         }
+        
         firebase.db.collection('users').add(newPost)
 
         return await newUser.user.updateProfile({

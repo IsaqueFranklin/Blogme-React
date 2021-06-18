@@ -12,6 +12,7 @@ import Search from './components/Search'
 import TopPosts from './components/TopPosts'
 import ReadPost from './components/ReadPost'
 import EditPost from './components/EditPost'
+import Profile from './components/Profile'
 import './styles/style.css'
 
 function App() {
@@ -30,10 +31,11 @@ function App() {
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/create' component={CreateLink} />
             <Route path='/home' component={Home} />  
-            <Route path='/top' component={TopPosts} />
-            <Route path='/search' component={Search} />
             <Route path='/post/:postId' component={ReadPost} />
             <Route path='/edit/:postId' component={EditPost} />
+            <Route path='/top' component={TopPosts} />
+            <Route path='/:postId' component={Profile} />
+            <Route path='/search' component={Search} />
           </Switch>
         </div>
       </div>

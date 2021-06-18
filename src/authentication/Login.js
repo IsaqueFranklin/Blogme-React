@@ -19,10 +19,11 @@ function Login(props) {
     const { handleChange, handleSubmit, handleBlur, errors, isSubmitting, values } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser)
     const [login, setLogin] = useState(true)
     const [firebaseError, setFirebaseError] =  useState(null)
+    const [username, setUsername] =  useState(null)
 
     async function authenticateUser() {
         const { name, email, password, blogName } = values
-
+        
         try {
             login
                 ? await firebase.login(email, password)
@@ -54,6 +55,7 @@ function Login(props) {
                 autoComplete="off"
                 name="name" 
                 className="input" />
+                {errors.name && <p className="error-text">{errors.name}</p>}
                 <br></br>
                 <Form.Label>your blog's name</Form.Label>
                 <Form.Control

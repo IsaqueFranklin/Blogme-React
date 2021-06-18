@@ -35,7 +35,8 @@ function CreateLink(props) {
                 thumbImg,
                 postedBy: {
                     id: user.uid,
-                    name: user.displayName
+                    name: user.displayName,
+                    email: user.email
                 },
                 voteCount: 0,
                 votes: [],

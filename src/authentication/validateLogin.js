@@ -1,4 +1,5 @@
 export default function validateLogin(values) {
+
     let errors = {}
 
     //Email errors
@@ -15,6 +16,10 @@ export default function validateLogin(values) {
         errors.password = "A senha precisa ter no mínimo 8 caracteres"
     }
 
+    //Name errors
+    if(!values.name) {
+        errors.name = "Username required"
+    }
     
     
     return errors;
