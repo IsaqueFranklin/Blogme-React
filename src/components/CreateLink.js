@@ -2,8 +2,7 @@ import React, { useContext, useState } from 'react'
 import useFormValidation from '../authentication/useFormValidation'
 import validateCreateLink from '../authentication/validateCreateLink'
 import FirebaseContext from '../firebase/context'
-import { Form, Card, Container } from 'react-bootstrap'
-import CenteredContainer from '../authentication/CenteredContainer'
+import { Form, Container } from 'react-bootstrap'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

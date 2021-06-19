@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import format from 'date-fns/format'
 import FirebaseContext from '../firebase/context'
-import { Form, Card, Button, Alert, Container } from 'react-bootstrap'
+import { Container, Card } from 'react-bootstrap'
 
 function Post({ post, showCount, history }) {
     
@@ -39,10 +39,11 @@ function Post({ post, showCount, history }) {
     return (
         <Container className="cont">
             <div className="links">
+                <br></br>
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
                 <h3>{post.title}</h3>
-                <small>By <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></small>
                 <br></br>
+                <p>By <Link to={`/${post.postedBy.email}`}>@{post.postedBy.name}</Link></p>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
                 <br></br>
@@ -50,8 +51,15 @@ function Post({ post, showCount, history }) {
             </div>
             <hr></hr>
             <div className="links" dangerouslySetInnerHTML={{ __html: post.text }} />
-            <hr></hr>
             <br></br>
+            <Card className="homecard links" style={{ backgroundColor: '#091116', color: '#fff'}}>
+                <Card.Body>
+                    <p>Wanna see more posts from @{post.postedBy.name}?</p>
+                    <Link to={`/${post.postedBy.email}`}><button style={{ backgroundColor: '#fff', color: '#091116'}}>See more posts</button></Link>
+                </Card.Body>
+            </Card>
+            <br></br>
+            <hr></hr>
             <br></br>
         </Container>
     )

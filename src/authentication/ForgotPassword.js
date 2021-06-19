@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import FirebaseContext from '../firebase/context'
-import { Form, Card, Button, Alert } from 'react-bootstrap'
+import { Form, Card } from 'react-bootstrap'
 import CenteredContainer from '../authentication/CenteredContainer'
 import { Link } from 'react-router-dom'
 

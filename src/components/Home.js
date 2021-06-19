@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../firebase/context'
 import PostContainer from './PostContainer'
-import { Container, Card, Row, Col, Link } from 'react-bootstrap'
+import { Container, Card, Row, Col } from 'react-bootstrap'
 import Footer from './Footer'
 import format from 'date-fns/format'
 
 
 function Home(props) {
 
-    const { firebase } = React.useContext(FirebaseContext)
+    const { firebase } = useContext(FirebaseContext)
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
@@ -94,7 +94,7 @@ function Home(props) {
         <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
             <h3>Best ranked blog profiles by stars</h3>
             {users.map((user) => (
-                 <Card className="homecard">
+                 <Card className="homecard" key={user.id}>
                  <Card.Body>
                  <Row>
                      <Col>

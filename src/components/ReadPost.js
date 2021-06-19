@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
 import { Container } from 'react-bootstrap'

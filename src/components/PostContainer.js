@@ -2,7 +2,7 @@ import React, { useContext} from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
-import { Form, Card, Button, Alert, Container, Row, Col } from 'react-bootstrap'
+import { Card, Container, Row, Col } from 'react-bootstrap'
 
 function PostContainer({ post, showCount, history }) {
     

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../firebase/context'
 import PostContainer from './PostContainer'
-import { Container, Card, Row, Col } from 'react-bootstrap'
+import { Container, Card } from 'react-bootstrap'
 import Footer from './Footer'
 
 function TopPosts(props) {
 
-    const { firebase } = React.useContext(FirebaseContext)
+    const { firebase } = useContext(FirebaseContext)
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
     const IsNewPage = props.location.pathname.includes('/home')

@@ -11,7 +11,7 @@ class Firebase {
     }
 
     async register(name, email, password, blogName){
-        const newUser = await this.auth.createUserWithEmailAndPassword(
+        const newUser = await  this.auth.createUserWithEmailAndPassword(
             email, password
         )
 
@@ -27,7 +27,6 @@ class Firebase {
             follows: [],
             comments: [],
         }
-        
         firebase.db.collection('users').add(newPost)
 
         return await newUser.user.updateProfile({
@@ -36,7 +35,7 @@ class Firebase {
         })
     }
 
-    async login(email, password){
+    async login(email, password) {
         return await this.auth.signInWithEmailAndPassword(email, password)
     }
 

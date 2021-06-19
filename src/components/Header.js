@@ -1,5 +1,5 @@
 import React from 'react'
-import { WithRouter, NavLink, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { FirebaseContext } from '../firebase'
 import './header.css'
@@ -31,7 +31,7 @@ function Header() {
                 {user ? (
                     <>
                         <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
-                        <NavDropdown.Item>{user.displayName}</NavDropdown.Item>
+                        <NavDropdown.Item href={`/${user.email}`}>{user.displayName}</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={() => firebase.logout()}>Sair</NavDropdown.Item>
                         <NavDropdown.Item href="/profile">Perfil</NavDropdown.Item>

@@ -13,6 +13,7 @@ import TopPosts from './components/TopPosts'
 import ReadPost from './components/ReadPost'
 import EditPost from './components/EditPost'
 import Profile from './components/Profile'
+import EditInfo from './components/EditInfo'
 import './styles/style.css'
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path='/top' component={TopPosts} />
             <Route path='/:postId' component={Profile} />
             <Route path='/search' component={Search} />
+            <Route path='/profile/:postId' component={EditInfo} />
           </Switch>
         </div>
       </div>

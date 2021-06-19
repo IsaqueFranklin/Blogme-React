@@ -15,12 +15,6 @@ export default function validateLogin(values) {
     } else if (values.password.length < 8) {
         errors.password = "A senha precisa ter no mínimo 8 caracteres"
     }
-
-    //Name errors
-    if(!values.name) {
-        errors.name = "Username required"
-    }
-    
     
     return errors;
 }

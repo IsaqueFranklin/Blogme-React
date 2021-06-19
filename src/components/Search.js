@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 import FirebaseContext from '../firebase/context'
 import { Form, Card, Container } from 'react-bootstrap'
 import PostContainer from './PostContainer'
-import Footer from './Footer'
 
 
 function Search() {
