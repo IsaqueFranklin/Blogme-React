@@ -1,5 +1,11 @@
 body {
     font-family: 'Noto Sans', sans-serif;
+    background-color: #fff;
+}
+
+.verified {
+    height: 25px;
+    width: 25px;
 }
 
 .logo {
@@ -27,21 +33,23 @@ button:hover {
     .links {
         padding: 0px;
         margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     img {
-        max-height: 200px;
-        max-width: 295px;
+        max-height: 100%;
+        max-width: 100%;
     }
 
     .ig {
-        margin-left: 4px;
-        margin-top: 4px;
         height: 200px;
-        width: 320px;
+        width: 100%;
         border-radius: 8px;
+        align-items: center;
+    }
+
+    .alig {
         align-items: center;
     }
 }
@@ -69,8 +77,8 @@ button:hover {
     }
 
     img {
-        max-height: 600px;
-        max-width: 600px;
+        max-height: 100%;
+        max-width: 100%;
     }
 
     .ig {

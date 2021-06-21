@@ -5,6 +5,7 @@ import FirebaseContext from '../firebase/context'
 import { Form, Container } from 'react-bootstrap'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Helmet} from "react-helmet";
 
 
 const INITIAL_STATE = {
@@ -50,6 +51,11 @@ function CreateLink(props) {
 
     return (
         <Container>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Create</title>
+                <meta name="description" content="In the process of creating a post."></meta>
+            </Helmet>
             <br></br>
             <br></br>
             <h2 className="titulo">Publishing your post</h2>

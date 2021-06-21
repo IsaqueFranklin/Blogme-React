@@ -4,7 +4,7 @@ import FirebaseContext from '../firebase/context'
 import { Container, Form } from 'react-bootstrap'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-
+import {Helmet} from "react-helmet";
 
 
 function EditPost(props) {
@@ -50,6 +50,11 @@ function EditPost(props) {
 
     return (
         <Container>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Edit post</title>
+                <meta name="description" content="Editing post"></meta>
+            </Helmet>
             <br></br>
             <br></br>
             <Form onSubmit={handleEdit}  className="flex flex-column">

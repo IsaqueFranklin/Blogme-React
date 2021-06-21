@@ -4,6 +4,7 @@ import PostContainer from './PostContainer'
 import { Container, Card, Row, Col } from 'react-bootstrap'
 import Footer from './Footer'
 import format from 'date-fns/format'
+import {Helmet} from "react-helmet";
 
 
 function Home(props) {
@@ -62,6 +63,11 @@ function Home(props) {
     return (
         <>
         <Container className="">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Blogme</title>
+                <meta name="description" content="Start your blog today and free your toughts."></meta>
+            </Helmet>
             <Container>
             <Card className="homecard">
                 <Card.Body>
@@ -98,7 +104,7 @@ function Home(props) {
                  <Card.Body>
                  <Row>
                      <Col>
-                     <h4>{user.blogName}</h4>
+                     <h4>{user.blogName} {user.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h4>
                     <p>@{user.name}</p>
                     <small>Since {format(user.created, 'dd/MM/yyyy')}</small>
                      </Col>

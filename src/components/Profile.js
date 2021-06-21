@@ -5,6 +5,7 @@ import FirebaseContext from '../firebase/context'
 import { Container, Card, Row, Col } from 'react-bootstrap'
 import PostContainer from './PostContainer'
 import Footer from './Footer'
+import {Helmet} from "react-helmet";
 
 
 function Profile(props) {
@@ -64,13 +65,18 @@ function Profile(props) {
       ) : (
         <>
         <Container className="cont">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>{users.blogName}</title>
+                <meta name="description" content={`This is the blog of @${users.name} created at ${format(users.created, 'dd/MM/yyyy')}.`}></meta>
+            </Helmet>
             <Container>
             <Card className="homecard">
                 <Card.Body>
                     <Row>
                     <Col>
                     <small>Since {format(users.created, 'dd/MM/yyyy')}</small>
-                    <h3>{users.blogName}</h3>
+                    <h3>{users.blogName} {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h3>
                     <h5>@{users.name}</h5>
                     <br></br>
                     <p style={{ backgroundColor: '#091116', color: '#fff', padding: 8, maxWidth: 450, borderRadius: 6}}>{users.bio}</p>
@@ -82,13 +88,12 @@ function Profile(props) {
                     }
                     </Col>
                     <Col md="auto">
-                    {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button>Edit profile</button></a> : <button>Instagram</button>}
+                    {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button>Edit profile</button></a> : <a href={users.instagram}><button>Instagram</button></a>}
                     </Col>
                     </Row>
                 </Card.Body>
             </Card>
             </Container>
-            <br></br>
             <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
                 {posts.map((post) => (
                     <PostContainer key={post.id} showCount={true} post={post} />

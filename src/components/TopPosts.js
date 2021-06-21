@@ -3,6 +3,8 @@ import FirebaseContext from '../firebase/context'
 import PostContainer from './PostContainer'
 import { Container, Card } from 'react-bootstrap'
 import Footer from './Footer'
+import {Helmet} from "react-helmet";
+
 
 function TopPosts(props) {
 
@@ -45,6 +47,11 @@ function TopPosts(props) {
     return (
       <>
         <Container className="cont">
+          <Helmet>
+                <meta charSet="utf-8" />
+                <title>Top posts</title>
+                <meta name="description" content="Top posts by stars."></meta>
+            </Helmet>
         <Container  className="cont">
           <br></br>
           <br></br>

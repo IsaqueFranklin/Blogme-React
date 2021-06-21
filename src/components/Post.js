@@ -4,6 +4,8 @@ import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import format from 'date-fns/format'
 import FirebaseContext from '../firebase/context'
 import { Container, Card } from 'react-bootstrap'
+import {Helmet} from "react-helmet";
+
 
 function Post({ post, showCount, history }) {
     
@@ -36,8 +38,29 @@ function Post({ post, showCount, history }) {
 
     const postedByAuthUser = user && user.uid === post.postedBy.id
 
+
     return (
         <Container className="cont">
+            <Helmet id="post">
+                <meta charSet="utf-8" />
+                <title>{post.title}</title>
+                <meta name="description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
+
+                <meta itemprop="name" content="Blogme" />
+                <meta itemprop="description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
+                <meta itemprop="image" content={post.thumbImg} />
+
+                <meta property="og:url" content="https://www.blogme.com.br/post/HUyqSvNfEmhqIcxbPsF6" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
+                <meta property="og:image" content={post.thumbImg} />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={post.title} />
+                <meta name="twitter:description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
+                <meta name="twitter:image" content={post.thumbImg} />
+            </Helmet>
             <div className="links">
                 <br></br>
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>

@@ -22,8 +22,8 @@ class Firebase {
             profileImg: "",
             created: Date.now(),
             followCount: 0,
-            pro: 0,
-            verified: 0,
+            pro: false,
+            verified: false,
             follows: [],
             comments: [],
         }

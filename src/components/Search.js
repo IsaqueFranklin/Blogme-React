@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import FirebaseContext from '../firebase/context'
 import { Form, Card, Container } from 'react-bootstrap'
 import PostContainer from './PostContainer'
+import {Helmet} from "react-helmet";
 
 
 function Search() {
@@ -41,6 +42,11 @@ function Search() {
     return (
         <>
         <Container className="cont">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Search</title>
+                <meta name="description" content="Search posts or users."></meta>
+            </Helmet>
             <Container className="">
             <br></br>
             <br></br>

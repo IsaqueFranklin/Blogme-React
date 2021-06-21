@@ -36,8 +36,8 @@ function PostContainer({ post, showCount, history }) {
     const postedByAuthUser = user && user.uid === post.postedBy.id
 
     return (
-        <Container className="cont">
-            <Card className="cardposts left">
+        <Container className="">
+            <Card className="cardposts left alig">
             <Row>
             <Col md="auto">
                 <img src={post.thumbImg} className="ig" />
