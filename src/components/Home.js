@@ -112,7 +112,7 @@ function Home(props) {
                          <a href={`/${user.email}`}><button>See more</button></a>
                          <br></br>
                          <br></br>
-                         <p style={{fontSize: 14}}>{users.followers.length}{"  "}<p style={{fontWeight: "bold", fontSize:14}}>followers</p></p>
+                         <p style={{fontSize: 14}}>{user.followers.length}{"  "}<p style={{fontWeight: "bold", fontSize:14}}>followers</p></p>
                      </Col>
                  </Row>
                  </Card.Body>
