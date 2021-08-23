@@ -29,6 +29,49 @@ button:hover {
     color: #091116;
 }
 
+.followButton {
+    padding: 8px 50px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #0073e6;
+    border: transparent;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #fff;
+    transition: 0.1s;
+}
+
+.followButton:hover {
+    padding: 8px 50px;
+    background-color: #0073e6;
+    border-radius: 5px;
+    font-size: 12px;
+    color: white;
+    transform: scale(1.06);
+}
+
+.unFollowButton {
+    padding: 8px 50px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #0a0a0a;
+    transition: 0.1s;
+}
+
+.unFollowButton:hover {
+    padding: 8px 50px;
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #0a0a0a;
+    transform: scale(1.06);
+}
+
 @media (max-width: 768px) {
     .links {
         padding: 0px;
