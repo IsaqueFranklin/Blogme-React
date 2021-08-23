@@ -38,10 +38,9 @@ function Post({ post, showCount, history }) {
 
     const postedByAuthUser = user && user.uid === post.postedBy.id
 
-
     return (
         <Container className="cont">
-            <Helmet id="post">
+            <Helmet title={post.title} url={post.thumbImg} image={post.thumbImg} description={post.title}>
                 <meta charSet="utf-8" />
                 <title>{post.title}</title>
                 <meta name="description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
@@ -50,7 +49,7 @@ function Post({ post, showCount, history }) {
                 <meta itemprop="description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />
                 <meta itemprop="image" content={post.thumbImg} />
 
-                <meta property="og:url" content="https://www.blogme.com.br/post/HUyqSvNfEmhqIcxbPsF6" />
+                <meta property="og:url" content={post.thumbImg} />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={post.title} />
                 <meta property="og:description" content={`${post.title}, this is a post by ${post.postedBy.name}, enjoy and come back for more :)`} />

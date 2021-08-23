@@ -15,19 +15,23 @@ class Firebase {
             email, password
         )
 
-        const newPost = {
-            blogName: blogName,
-            name: name,
-            email: email,
-            profileImg: "",
-            created: Date.now(),
-            followCount: 0,
-            pro: false,
-            verified: false,
-            follows: [],
-            comments: [],
+        if(newUser.user.uid){
+            const newPost = {
+                bio: "",
+                blogName: blogName,
+                name: name,
+                email: email,
+                profileImg: "",
+                created: Date.now(),
+                followCount: 0,
+                pro: false,
+                verified: false,
+                followers: [],
+                following: [],
+                comments: [],
+            }
+            await firebase.db.collection('users').doc(newUser.user.uid).set(newPost)
         }
-        firebase.db.collection('users').add(newPost)
 
         return await newUser.user.updateProfile({
             displayName: name,
