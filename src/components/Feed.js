@@ -32,14 +32,7 @@ function Feed(props) {
         })
     }
 
-    /*function getFeedPosts() {
-        firebase.db.collection('posts').where(app.firestore.FieldPath.documentId(), 'in', follow).get().then(snapshot => {
-            const feed = snapshot.docs.map(doc => {
-                return { id: doc.id, ...doc.data()}
-            })
-            setPosts(feed)
-        })
-    }*/
+    
 
 
 

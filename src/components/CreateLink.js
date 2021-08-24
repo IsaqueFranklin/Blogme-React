@@ -46,7 +46,11 @@ function CreateLink(props) {
                 comments: [],
                 created: Date.now()
             }
-            firebase.db.collection('posts').add(newPost)
+            firebase.db.collection('posts').add(newPost).then(function(docRef) {
+                firebase.db.collection('users').doc(user.uid).update({
+                    posts: app.firestore.FieldValue.arrayUnion(docRef.id)
+                })
+            })
 
             props.history.push('/')
         }

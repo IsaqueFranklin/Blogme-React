@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
 import { Card, Container, Row, Col } from 'react-bootstrap'
+import app from 'firebase/app'
+
 
 function PostContainer({ post, showCount, history }) {
     
@@ -29,6 +31,10 @@ function PostContainer({ post, showCount, history }) {
         const linkRef = firebase.db.collection('posts').doc(post.id)
         linkRef.delete().then(() => {
             console.log(`O documento com ID ${post.id} foi deletado.`)
+        })
+
+        firebase.db.collection('users').doc(user.uid).update({
+            posts: app.firestore.FieldValue.arrayRemove(post.id)
         })
     }
 
