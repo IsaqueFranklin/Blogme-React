@@ -14,6 +14,7 @@ import ReadPost from './components/ReadPost'
 import EditPost from './components/EditPost'
 import Profile from './components/Profile'
 import Info from './components/Info'
+import Feed from './components/Feed'
 import './styles/style.css'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/create' component={CreateLink} />
             <Route path='/home' component={Home} />  
+            
             <Route path='/top' component={TopPosts} />
             <Route path='/search' component={Search} />
             <Route exact path='/profile/:postId' component={Info} />

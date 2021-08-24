@@ -14,10 +14,7 @@ function Profile(props) {
 
     const [users, setUsers] = useState(null)
     const [posts, setPosts] = useState([])
-    const [myUser, setMyUser] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [filteredPosts, setFilteredPosts] = useState([])
-    const [filter, setFilter] = useState("")
     const postId = props.match.params.postId
     const postRef = firebase.db.collection('users').where('email', '==', postId)
     const isTopPage = props.location.pathname.includes('');
@@ -132,7 +129,7 @@ function Profile(props) {
                     <br></br>
                     {
                     (users.followers?.includes(user?.uid)) 
-                    ? <button className="unFollowButton" onClick={() => unFollowUser()}>Following</button>
+                    ? <button className="unFollowButton" onClick={() => unFollowUser()}>Following<img src="/img/check.png" alt="following" style={{width:14, height:16, marginLeft:3, marginBottom:3}}/></button>
                     : <button className="followButton" onClick={() => followUser()}>Follow</button>
                     }
                     </Col>

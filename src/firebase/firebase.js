@@ -29,6 +29,7 @@ class Firebase {
                 followers: [],
                 following: [],
                 comments: [],
+                posts: []
             }
             await firebase.db.collection('users').doc(newUser.user.uid).set(newPost)
         }

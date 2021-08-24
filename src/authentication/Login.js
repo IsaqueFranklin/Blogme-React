@@ -101,7 +101,7 @@ function Login(props) {
               {firebaseError && <p className='error-text'>{firebaseError}</p>}
 
               <button type="submit" className="" disbaled={isSubmitting}>
-                      Entrar
+                      {login ? "Login" : "Create account"}
                   </button>
                   <button type="button" className="" onClick={() => setLogin(prevLogin => !prevLogin)}>
                       {login ? "Ainda não tem uma conta?" : "Já tem uma conta?"}

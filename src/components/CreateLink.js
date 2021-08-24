@@ -6,6 +6,7 @@ import { Form, Container } from 'react-bootstrap'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {Helmet} from "react-helmet";
+import app from 'firebase/app'
 
 
 const INITIAL_STATE = {
@@ -29,7 +30,9 @@ function CreateLink(props) {
             props.history.push('/login')
         } else {
             const { title, thumbImg } = values
+
             const newPost = {
+                uid: user.uid,
                 title,
                 text: textComment,
                 thumbImg,
@@ -44,6 +47,7 @@ function CreateLink(props) {
                 created: Date.now()
             }
             firebase.db.collection('posts').add(newPost)
+
             props.history.push('/')
         }
     }
