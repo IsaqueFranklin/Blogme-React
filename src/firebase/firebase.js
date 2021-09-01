@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 import firebaseConfig from './config'
 
 class Firebase {
@@ -8,6 +9,7 @@ class Firebase {
         app.initializeApp(firebaseConfig);
         this.auth = app.auth()
         this.db = app.firestore()
+        this.storage = app.storage()
     }
 
     async register(name, email, password, blogName){
@@ -29,7 +31,8 @@ class Firebase {
                 followers: [],
                 following: [],
                 comments: [],
-                posts: []
+                posts: [],
+                notifications: [],
             }
             await firebase.db.collection('users').doc(newUser.user.uid).set(newPost)
         }

@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap'
 import Post from './Post'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-
+import app from 'firebase/app'
 
 function ReadPost(props) {
     
@@ -47,6 +47,10 @@ function ReadPost(props) {
               setCommentText("")
             }
           })
+
+          /*firebase.db.collection('users').doc(post.uid).update({
+              notifications: app.firestore.FieldValue.arrayUnion({ content: { type: 'comment', text: commentText, byUid: user.uid, byName: user.name, created: Date.now()}})
+          })*/
         }
       }
 

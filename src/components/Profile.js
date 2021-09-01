@@ -8,6 +8,7 @@ import Footer from './Footer'
 import {Helmet} from "react-helmet";
 import app from 'firebase/app'
 
+
 function Profile(props) {
     
     const { firebase, user } = useContext(FirebaseContext)
@@ -18,11 +19,36 @@ function Profile(props) {
     const postId = props.match.params.postId
     const postRef = firebase.db.collection('users').where('email', '==', postId)
     const isTopPage = props.location.pathname.includes('');
+
+    const [file, setFile] = useState(null);
+    const [url, setURL] = useState("");
   
     useEffect(() => {
       getUser();
       getInitialPosts();
     }, [])
+
+
+    function handleChange(e) {
+        setFile(e.target.files[0]);
+    }
+    
+
+    function handleUpload(e) {
+        e.preventDefault()
+        const ref = firebase.storage.ref(`/images/${file.name}`);
+        const uploadTask = ref.put(file);
+        uploadTask.on("state_changed", console.log, console.error, () => {
+          ref
+            .getDownloadURL()
+            .then((url) => {
+              setFile(null);
+              setURL(url);
+              firebase.db.collection('users').doc(user.uid).update({ profileImg: url })
+            });
+        })
+      }
+
   
     function getUser() {
       return postRef.onSnapshot((snapshot) => {
@@ -112,6 +138,9 @@ function Profile(props) {
                     <Row>
                     <Col>
                     <small>Since {format(users.created, 'dd/MM/yyyy')}</small>
+                    <br></br>
+                    <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', margin: 20, alignItems: 'center'}} />
+                    <br></br>
                     <h3>{users.blogName} {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h3>
                     <br></br>
                         <Row>
@@ -137,6 +166,12 @@ function Profile(props) {
                     {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button className="unFollowButton">Edit profile</button></a> : null}
                     </Col>
                     </Row>
+                    {user && users.email == user.email ? 
+                    <form onSubmit={handleUpload}>
+                        <input type="file" onChange={handleChange} />
+                        <button disabled={!file}>upload to firebase</button>
+                    </form>
+                    : null}
                 </Card.Body>
             </Card>
             </Container>
