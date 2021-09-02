@@ -65,8 +65,8 @@ function Info(props) {
             .then((url) => {
               setFile(null);
               setURL(url);
-              firebase.db.collection('users').doc(user.uid).update({ profileImg: url })
-            });
+              firebase.db.collection('users').doc(user.uid).update({ profileImg: url }).then(() => {window.location.reload()})
+            })
         })
       }
 
@@ -84,15 +84,15 @@ function Info(props) {
             <Container style={{marginTop: 0, marginBottom: 50, flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
             
             {
-            (users.profileImg === undefined) ?
-            <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" /> :
+            (users.profileImg === "" || users.profileImg === undefined || users.profileImg === null) ?
+            <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center'}} /> :
             <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center'}} />
             }
             
             <h3 style={{marginBottom: 20, marginTop: 20}}>Your profile image</h3>
             <Form onSubmit={handleUpload}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control type="file" placeholder="Enter email" />
+            <Form.Group className="mb-3">
+                <Form.Control type="file" onChange={handleChange} />
                 <button disabled={!file} style={{marginBottom: 20, marginTop: 20}}>Upload</button>
             </Form.Group>
             </Form>

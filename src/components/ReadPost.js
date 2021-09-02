@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
 import { Container } from 'react-bootstrap'
@@ -13,17 +13,32 @@ function ReadPost(props) {
     const { firebase, user } = useContext(FirebaseContext)
     const [post, setPost] = useState(null)
     const [commentText, setCommentText] = useState("")
+    const [users, setUsers] = useState("")
     const postId = props.match.params.postId
     const postRef = firebase.db.collection('posts').doc(postId)
   
     useEffect(() => {
-      getPost()
+      getPost();
+      getUser();
     }, [])
   
     function getPost() {
       postRef.get().then(doc => {
         setPost({...doc.data(), id: doc.id})
       })
+    }
+
+    function getUser() {
+      if (user) {
+        return firebase.db.collection('users').where('email', '==', user.email).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setUsers({...doc.data(), id: doc.id});
+          });
+        });
+      } else {
+        return null;
+      }
     }
 
     function handleAddComment() {
@@ -34,7 +49,7 @@ function ReadPost(props) {
             if(doc.exists){
               const previousComments = doc.data().comments
               const comment = {
-                postedBy: { id: user.uid, name: user.displayName },
+                postedBy: { id: user.uid, name: user.displayName, photo: users.profileImg, email: user.email },
                 created: Date.now(),
                 text: commentText
               }
@@ -85,9 +100,12 @@ function ReadPost(props) {
             <br></br>
             {post.comments.map((comment, index) => (
                 <div key={index} className="">
-                <p className="comment-author">
-                    {comment.postedBy.name} | {distanceInWordsToNow(comment.created)}
-                </p>
+                <p className="comment-author" style={{fontSize: 16, fontWeight: 600}}>
+                <Link to={`/${comment.postedBy.email}`}>{
+                    (comment.postedBy.photo === "" || comment.postedBy.photo === undefined || comment.postedBy.photo === null) ?
+                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
+                    <img src={comment.postedBy.photo} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
+                  } {comment.postedBy.name}</Link> <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
                 <div dangerouslySetInnerHTML={{ __html: comment.text }} />
                 <hr></hr>
                 <br></br>

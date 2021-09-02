@@ -117,7 +117,7 @@ function Profile(props) {
                     <small>Since {format(users.created, 'dd/MM/yyyy')}</small>
                     <br></br>
                     {
-                    (users.profileImg === undefined) ?
+                    (users.profileImg === "" || users.profileImg === undefined || users.profileImg === null) ?
                     <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} /> :
                     <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} />
                     }

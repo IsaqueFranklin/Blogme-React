@@ -80,7 +80,11 @@ function Post({ post, showCount, history }) {
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
                 <h3>{post.title}</h3>
                 <br></br>
-                <p><img src={users.profileImg} alt="profile pic" style={{width: 40, height: 40, borderRadius: '50%', marginRight: 10, alignItems: 'center'}} /> <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
+                <p>{
+                    (users.profileImg === "" || undefined || null) ?
+                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginRight: 10}} /> :
+                    <img src={users.profileImg} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginBottom: 10, marginRight: 10 }} />
+                    } <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
                 <br></br>
