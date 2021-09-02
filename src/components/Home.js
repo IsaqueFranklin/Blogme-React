@@ -104,6 +104,7 @@ function Home(props) {
                  <Card.Body>
                  <Row>
                      <Col>
+                     <img src={user.profileImg} alt="profile pic" style={{width: 80, height: 80, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} />
                      <h4>{user.blogName} {user.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h4>
                     <p>@{user.name}</p>
                     <small>Since {format(user.created, 'dd/MM/yyyy')}</small>

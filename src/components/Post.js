@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, { useContext, useState, useEffect} from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import format from 'date-fns/format'
@@ -10,6 +10,13 @@ import {Helmet} from "react-helmet";
 function Post({ post, showCount, history }) {
     
     const { firebase, user } = useContext(FirebaseContext)
+    const [users, setUsers] = useState("")
+
+
+    useEffect(() => {
+        getUser();
+    }, [])
+
 
     function handleVote() {
         if(!user) {
@@ -27,6 +34,12 @@ function Post({ post, showCount, history }) {
             })
         }
     }
+
+    function getUser() {
+        return firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
+            setUsers({...doc.data(), id: doc.id})
+          })
+      }
 
     function handleDeleteLink() {
         const linkRef = firebase.db.collection('posts').doc(post.id)
@@ -65,7 +78,7 @@ function Post({ post, showCount, history }) {
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
                 <h3>{post.title}</h3>
                 <br></br>
-                <p>By <Link to={`/${post.postedBy.email}`}>@{post.postedBy.name}</Link></p>
+                <p><img src={users.profileImg} alt="profile pic" style={{width: 50, height: 50, borderRadius: '50%', alignItems: 'center'}} /> <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
                 <br></br>

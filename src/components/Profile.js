@@ -20,34 +20,11 @@ function Profile(props) {
     const postRef = firebase.db.collection('users').where('email', '==', postId)
     const isTopPage = props.location.pathname.includes('');
 
-    const [file, setFile] = useState(null);
-    const [url, setURL] = useState("");
   
     useEffect(() => {
       getUser();
       getInitialPosts();
     }, [])
-
-
-    function handleChange(e) {
-        setFile(e.target.files[0]);
-    }
-    
-
-    function handleUpload(e) {
-        e.preventDefault()
-        const ref = firebase.storage.ref(`/images/${file.name}`);
-        const uploadTask = ref.put(file);
-        uploadTask.on("state_changed", console.log, console.error, () => {
-          ref
-            .getDownloadURL()
-            .then((url) => {
-              setFile(null);
-              setURL(url);
-              firebase.db.collection('users').doc(user.uid).update({ profileImg: url })
-            });
-        })
-      }
 
   
     function getUser() {
@@ -139,7 +116,11 @@ function Profile(props) {
                     <Col>
                     <small>Since {format(users.created, 'dd/MM/yyyy')}</small>
                     <br></br>
-                    <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', margin: 20, alignItems: 'center'}} />
+                    {
+                    (users.profileImg === undefined) ?
+                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} /> :
+                    <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} />
+                    }
                     <br></br>
                     <h3>{users.blogName} {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h3>
                     <br></br>
@@ -166,12 +147,6 @@ function Profile(props) {
                     {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button className="unFollowButton">Edit profile</button></a> : null}
                     </Col>
                     </Row>
-                    {user && users.email == user.email ? 
-                    <form onSubmit={handleUpload}>
-                        <input type="file" onChange={handleChange} />
-                        <button disabled={!file}>upload to firebase</button>
-                    </form>
-                    : null}
                 </Card.Body>
             </Card>
             </Container>
