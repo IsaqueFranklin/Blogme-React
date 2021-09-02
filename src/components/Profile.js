@@ -109,22 +109,24 @@ function Profile(props) {
                 <title>{users.blogName}</title>
                 <meta name="description" content={`This is the blog of @${users.name} created at ${format(users.created, 'dd/MM/yyyy')}.`}></meta>
             </Helmet>
-            <Container>
+            <Container className="">
             <Card className="homecard">
                 <Card.Body>
                     <Row>
                     <Col>
-                    <small>Since {format(users.created, 'dd/MM/yyyy')}</small>
+                    <div className="back" style={{backgroundImage: `url(${users.coverImg})`}}>
+                        <br></br>
+                        {
+                        (users.profileImg === "" || users.profileImg === undefined || users.profileImg === null) ?
+                        <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} /> :
+                        <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginTop: 80, marginLeft: 20, justifyContent: 'center'}} />
+                        }
+                    </div>
                     <br></br>
-                    {
-                    (users.profileImg === "" || users.profileImg === undefined || users.profileImg === null) ?
-                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} /> :
-                    <img src={users.profileImg} style={{width: 150, height: 150, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} />
-                    }
+                    <h3 style={{marginLeft: 20, marginTop: 50}}>{users.blogName} {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h3>
+                    <small style={{marginLeft: 20}}>Since {format(users.created, 'dd/MM/yyyy')}</small>
                     <br></br>
-                    <h3>{users.blogName} {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h3>
-                    <br></br>
-                        <Row>
+                        <Row style={{marginLeft: 10, marginTop: 30}}>
                                 <Col md="auto">
                                     <p style={{fontSize: 14}}>{users.followers.length}{"  "}<p style={{fontWeight: "bold", fontSize:14}}>followers</p></p>
                                     
@@ -135,15 +137,13 @@ function Profile(props) {
                                     
                                 </Col>
                         </Row>
-                        <p style={{ padding: 8, maxWidth: 450,}}>{users.bio}</p>
+                        <p style={{ padding: 8, maxWidth: 450, marginLeft: 10}}>{users.bio}</p>
                     <br></br>
                     {
                     (users.followers?.includes(user?.uid)) 
-                    ? <button className="unFollowButton" onClick={() => unFollowUser()}>Following<img src="/img/check.png" alt="following" style={{width:14, height:16, marginLeft:3, marginBottom:3}}/></button>
-                    : <button className="followButton" onClick={() => followUser()}>Follow</button>
+                    ? <button style={{marginLeft: 20}} className="unFollowButton" onClick={() => unFollowUser()}>Following<img src="/img/check.png" alt="following" style={{width:14, height:16, marginLeft:3, marginBottom:3}}/></button>
+                    : <button style={{marginLeft: 20}} className="followButton" onClick={() => followUser()}>Follow</button>
                     }
-                    </Col>
-                    <Col md="auto">
                     {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button className="unFollowButton">Edit profile</button></a> : null}
                     </Col>
                     </Row>

@@ -68,7 +68,28 @@ function Info(props) {
               firebase.db.collection('users').doc(user.uid).update({ profileImg: url }).then(() => {window.location.reload()})
             })
         })
-      }
+    }
+
+
+    function handleChangeCover(e) {
+        setFile(e.target.files[0]);
+    }
+    
+
+    function handleUploadCover(e) {
+        e.preventDefault()
+        const ref = firebase.storage.ref(`/images/${file.name}`);
+        const uploadTask = ref.put(file);
+        uploadTask.on("state_changed", console.log, console.error, () => {
+          ref
+            .getDownloadURL()
+            .then((url) => {
+              setFile(null);
+              setURL(url);
+              firebase.db.collection('users').doc(user.uid).update({ coverImg: url }).then(() => {window.location.reload()})
+            })
+        })
+    }
 
 
     return (
@@ -93,6 +114,23 @@ function Info(props) {
             <Form onSubmit={handleUpload}>
             <Form.Group className="mb-3">
                 <Form.Control type="file" onChange={handleChange} />
+                <button disabled={!file} style={{marginBottom: 20, marginTop: 20}}>Upload</button>
+            </Form.Group>
+            </Form>
+            </Container>
+
+            <Container style={{marginTop: 0, marginBottom: 50, flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            
+            {
+            (users.coverImg === "" || users.coverImg === undefined || users.coverImg === null) ?
+            <img src="https://icoconvert.com/images/noimage2.png" alt="user" style={{width: '100%', height: 200, alignItems: 'center'}} /> :
+            <img src={users.coverImg} style={{width: '100%', height: 200, alignItems: 'center'}} />
+            }
+            
+            <h3 style={{marginBottom: 20, marginTop: 20}}>Your cover image</h3>
+            <Form onSubmit={handleUploadCover}>
+            <Form.Group className="mb-3">
+                <Form.Control type="file" onChange={handleChangeCover} />
                 <button disabled={!file} style={{marginBottom: 20, marginTop: 20}}>Upload</button>
             </Form.Group>
             </Form>

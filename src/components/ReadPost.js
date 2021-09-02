@@ -105,7 +105,7 @@ function ReadPost(props) {
                     (comment.postedBy.photo === "" || comment.postedBy.photo === undefined || comment.postedBy.photo === null) ?
                     <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
                     <img src={comment.postedBy.photo} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
-                  } {comment.postedBy.name}</Link> <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
+                  } {comment.postedBy.name} </Link> {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" style={{width: 20, height: 20, marginBottom: 5}} />} <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
                 <div dangerouslySetInnerHTML={{ __html: comment.text }} />
                 <hr></hr>
                 <br></br>
