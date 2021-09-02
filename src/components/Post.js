@@ -36,9 +36,11 @@ function Post({ post, showCount, history }) {
     }
 
     function getUser() {
-        return firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
-            setUsers({...doc.data(), id: doc.id})
-          })
+        return firebase.db.collection('users').where('email', '==', post.postedBy.email).onSnapshot((snapshot) => {
+            snapshot.forEach((doc) => {
+              setUsers({...doc.data(), id: doc.id});
+            });
+          });
       }
 
     function handleDeleteLink() {
@@ -78,7 +80,7 @@ function Post({ post, showCount, history }) {
                 <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
                 <h3>{post.title}</h3>
                 <br></br>
-                <p><img src={users.profileImg} alt="profile pic" style={{width: 50, height: 50, borderRadius: '50%', alignItems: 'center'}} /> <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
+                <p><img src={users.profileImg} alt="profile pic" style={{width: 40, height: 40, borderRadius: '50%', marginRight: 10, alignItems: 'center'}} /> <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
                 <br></br>
