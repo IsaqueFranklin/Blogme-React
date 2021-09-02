@@ -200,6 +200,13 @@ a:hover{
     border: transparent;
 }
 
+.homecard2 {
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
 .blogmelogo {
     height: 250px;
     width: 250px;

@@ -114,7 +114,7 @@ function Profile(props) {
                 <Card.Body>
                     <Row>
                     <Col>
-                    <div className="back" style={{backgroundImage: `url(${users.coverImg})`}}>
+                    <div className="back" style={{backgroundImage: (users.coverImg === "" || users.coverImg === undefined || users.coverImg === null) ? 'url(https://icoconvert.com/images/noimage2.png)' : `url(${users.coverImg})`}}>
                         <br></br>
                         {
                         (users.profileImg === "" || users.profileImg === undefined || users.profileImg === null) ?

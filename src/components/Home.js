@@ -100,7 +100,7 @@ function Home(props) {
         <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
             <h3>Best ranked blog profiles by stars</h3>
             {users.map((user) => (
-                 <Card className="homecard" key={user.id}>
+                 <Card className="homecard2" key={user.id}>
                  <Card.Body>
                  <Row>
                      <Col>
