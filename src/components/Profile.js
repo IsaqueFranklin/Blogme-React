@@ -15,6 +15,7 @@ function Profile(props) {
 
     const [users, setUsers] = useState(null)
     const [posts, setPosts] = useState([])
+    const [myUser, setMyUser] = useState("")
     const [loading, setLoading] = useState(false)
     const postId = props.match.params.postId
     const postRef = firebase.db.collection('users').where('email', '==', postId)
@@ -23,8 +24,22 @@ function Profile(props) {
   
     useEffect(() => {
       getUser();
+      getMyUser();
       getInitialPosts();
     }, [])
+
+    function getMyUser() {
+        if (user) {
+          return firebase.db.collection('users').where('email', '==', user.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              setMyUser({...doc.data(), id: doc.id});
+            });
+          });
+        } else {
+          return null;
+        }
+    }
 
   
     function getUser() {
@@ -83,7 +98,7 @@ function Profile(props) {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, userId: user.uid },
+                    by: { id: user.uid, name: user.displayName, photo: users.profileImg },
                     created: Date.now(),
                     userId: user.uid,
                     note: `${user.displayName} está te seguindo agora.`,

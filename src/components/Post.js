@@ -47,18 +47,18 @@ function Post({ post, showCount, history }) {
                 }
             })
 
-            firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
+            firebase.db.collection('users').doc(post?.postedBy.id).get().then(doc => {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, photo: myUser.profileImg, userId: user.uid },
+                    by: { id: user.uid, name: user.displayName, photo: myUser?.profileImg, userId: user.uid },
                     created: Date.now(),
                     userId: user.uid,
-                    note: `${user.displayName} curtiu seu post.`,
+                    note: `${user.displayName} curtiu seu post "${post.title}".`,
                     visto: false,
                   }
                   const updatedComments = [...previous, comment]
-                  firebase.db.collection('users').doc(post.postedBy.id).update({ notifications: updatedComments }).then(() => {window.location.reload()})
+                  firebase.db.collection('users').doc(post?.postedBy.id).update({ notifications: updatedComments }).then(() => {window.location.reload()})
                 }
               })
         }

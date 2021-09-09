@@ -10,9 +10,11 @@ function PostContainer({ post, showCount, history }) {
     
     const { firebase, user } = useContext(FirebaseContext)
     const [myUser, setMyUser] = useState("")
+    const [users, setUsers] = useState("")
 
     useEffect(() => {
         getMyUser();
+        getUser();
     }, [])
 
     function getMyUser() {
@@ -26,6 +28,14 @@ function PostContainer({ post, showCount, history }) {
         } else {
           return null;
         }
+    }
+
+    function getUser() {
+        return firebase.db.collection('users').where('email', '==', post.postedBy.id).onSnapshot((snapshot) => {
+          snapshot.forEach((doc) => {
+            setUsers({...doc.data(), id: doc.id});
+          });
+        });
     }
 
 
@@ -45,18 +55,18 @@ function PostContainer({ post, showCount, history }) {
             })
 
 
-            firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
+            firebase.db.collection('users').doc(post?.postedBy.id).get().then(doc => {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, photo: myUser.profileImg, userId: user.uid },
+                    by: { id: user.uid, name: user.displayName, userId: user.uid },
                     created: Date.now(),
                     userId: user.uid,
-                    note: `${user.displayName} curtiu seu post no explorar.`,
+                    note: `${user.displayName} curtiu seu post "${post.title}" no explorar.`,
                     visto: false,
                   }
                   const updatedComments = [...previous, comment]
-                  firebase.db.collection('users').doc(post.postedBy.id).update({ notifications: updatedComments })
+                  firebase.db.collection('users').doc(post?.postedBy.id).update({ notifications: updatedComments })
                 }
               })
         }

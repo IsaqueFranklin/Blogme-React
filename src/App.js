@@ -14,6 +14,7 @@ import ReadPost from './components/ReadPost'
 import EditPost from './components/EditPost'
 import Profile from './components/Profile'
 import Info from './components/Info'
+import Notifications from './components/Notifications'
 import Feed from './components/Feed'
 import './styles/style.css'
 
@@ -40,6 +41,7 @@ function App() {
             <Route path='/post/:postId' component={ReadPost} />
             <Route path='/edit/:postId' component={EditPost} />
             <Route path='/:postId' component={Profile} />
+            <Route path='/notifications' component={Notifications} />
           </Switch>
         </div>
       </div>
