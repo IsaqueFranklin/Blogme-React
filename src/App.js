@@ -38,10 +38,10 @@ function App() {
             <Route path='/top' component={TopPosts} />
             <Route path='/search' component={Search} />
             <Route exact path='/profile/:postId' component={Info} />
+            <Route path='/notifications' component={Notifications} />
             <Route path='/post/:postId' component={ReadPost} />
             <Route path='/edit/:postId' component={EditPost} />
             <Route path='/:postId' component={Profile} />
-            <Route path='/notifications' component={Notifications} />
           </Switch>
         </div>
       </div>

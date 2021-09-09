@@ -8,43 +8,53 @@ import { Container, Card, Row, Col } from 'react-bootstrap'
 function Notifications(props) {
 
     const { firebase, user } = useContext(FirebaseContext)
-    const [users, setUsers] = useState("")
+    const [users, setUsers] = useState(null)
 
 
     useEffect(() => {
         getUser();
-    }, [])
+    }, [user])
 
 
     function getUser() {
-        if (user) {
-          return firebase.db.collection('users').doc(user.uid).get().then(doc => {
-            setUsers({...doc.data(), id: doc.id})
-          })
+        if (user?.uid) {
+            return firebase.db.collection('users').doc(user?.uid).get().then(doc => {
+                setUsers({...doc.data(), id: doc.id})
+            })
         } else {
-          props.history.push('/')
+            return null
         }
     }
 
 
     return !users ? (
+        <>
         <div>Loading...</div>
+        <h1>{user?.uid}</h1>
+        </>
       ) : (
         <Container>
-            {users.notifications.map((item, index) => (
+            <h3 style={{marginTop: 30, marginBottom: 20}}>Your notifications :)</h3>
+            {users?.notifications?.sort((a, b) => a.created > b.created ? 1:-1).map((item, index) => (
                     <Card key={index} className="cardposts">
+                        <Link to={`/post/${item.postId}`}>
                         <Card.Body>
                             <Row>
                                 <Col md='auto'>
+                                    {
+                                    (item.by?.photo === "" || item.by?.photo === undefined || item.by?.photo === null) ?
+                                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 70, height: 70, borderRadius: '50%'}} /> :
                                     <img src={item.by.photo} alt="user photo" style={{width: 70, height: 70, borderRadius: '50%'}} />
+                                    }
                                 </Col>
 
                                 <Col md='auto'>
-                                    <small>{distanceInWordsToNow(item.created)} ago</small>
+                                    <small>{distanceInWordsToNow(item?.created)}</small>
                                     <p>{item.note}</p>
                                 </Col>
                             </Row>
                         </Card.Body>
+                        </Link>
                     </Card>
             ))}
         </Container>

@@ -59,7 +59,7 @@ function PostContainer({ post, showCount, history }) {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, userId: user.uid },
+                    by: { id: user.uid, name: user.displayName, photo: myUser.profileImg, userId: user.uid },
                     created: Date.now(),
                     userId: user.uid,
                     note: `${user.displayName} curtiu seu post "${post.title}" no explorar.`,
