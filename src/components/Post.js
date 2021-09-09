@@ -11,12 +11,26 @@ function Post({ post, showCount, history }) {
     
     const { firebase, user } = useContext(FirebaseContext)
     const [users, setUsers] = useState("")
+    const [myUser, setMyUser] = useState("")
 
 
     useEffect(() => {
         getUser();
+        getMyUser();
     }, [])
 
+    function getMyUser() {
+        if (user) {
+          return firebase.db.collection('users').where('email', '==', user.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              setMyUser({...doc.data(), id: doc.id});
+            });
+          });
+        } else {
+          return null;
+        }
+    }
 
     function handleVote() {
         if(!user) {
@@ -29,9 +43,24 @@ function Post({ post, showCount, history }) {
                     const vote = { votedBy: { id: user.uid, name: user.displayName }}
                     const updatedVotes = [...previousVotes, vote]
                     const voteCount =updatedVotes.length
-                    voteRef.update({ votes : updatedVotes, voteCount }).then(() => {window.location.reload()})
+                    voteRef.update({ votes : updatedVotes, voteCount })
                 }
             })
+
+            firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
+                if(doc.exists){
+                  const previous = doc.data().notifications
+                  const comment = {
+                    by: { id: user.uid, name: user.displayName, photo: myUser.profileImg, userId: user.uid },
+                    created: Date.now(),
+                    userId: user.uid,
+                    note: `${user.displayName} curtiu seu post.`,
+                    visto: false,
+                  }
+                  const updatedComments = [...previous, comment]
+                  firebase.db.collection('users').doc(post.postedBy.id).update({ notifications: updatedComments }).then(() => {window.location.reload()})
+                }
+              })
         }
     }
 

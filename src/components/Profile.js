@@ -83,9 +83,9 @@ function Profile(props) {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, photo: users.profileImg, userId: users.id },
+                    by: { id: user.uid, name: user.displayName, userId: user.uid },
                     created: Date.now(),
-                    userId: users.id,
+                    userId: user.uid,
                     note: `${user.displayName} está te seguindo agora.`,
                     visto: false,
                   }

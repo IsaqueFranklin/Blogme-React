@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import FirebaseContext from '../firebase/context'
@@ -9,6 +9,25 @@ import app from 'firebase/app'
 function PostContainer({ post, showCount, history }) {
     
     const { firebase, user } = useContext(FirebaseContext)
+    const [myUser, setMyUser] = useState("")
+
+    useEffect(() => {
+        getMyUser();
+    }, [])
+
+    function getMyUser() {
+        if (user) {
+          return firebase.db.collection('users').where('email', '==', user.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              setMyUser({...doc.data(), id: doc.id});
+            });
+          });
+        } else {
+          return null;
+        }
+    }
+
 
     function handleVote() {
         if(!user) {
@@ -24,6 +43,22 @@ function PostContainer({ post, showCount, history }) {
                     voteRef.update({ votes : updatedVotes, voteCount })
                 }
             })
+
+
+            firebase.db.collection('users').doc(post.postedBy.id).get().then(doc => {
+                if(doc.exists){
+                  const previous = doc.data().notifications
+                  const comment = {
+                    by: { id: user.uid, name: user.displayName, photo: myUser.profileImg, userId: user.uid },
+                    created: Date.now(),
+                    userId: user.uid,
+                    note: `${user.displayName} curtiu seu post no explorar.`,
+                    visto: false,
+                  }
+                  const updatedComments = [...previous, comment]
+                  firebase.db.collection('users').doc(post.postedBy.id).update({ notifications: updatedComments })
+                }
+              })
         }
     }
 
