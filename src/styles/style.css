@@ -200,6 +200,14 @@ a:hover{
     border: transparent;
 }
 
+.homecard3 {
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 70px;
+    border: transparent;
+}
+
 .homecard2 {
     padding: 8px;
     border-radius: 10px;

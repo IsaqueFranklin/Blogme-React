@@ -78,6 +78,22 @@ function Profile(props) {
                 followers: app.firestore.FieldValue.arrayUnion(user.uid)
             })
 
+
+            firebase.db.collection('users').doc(users.id).get().then(doc => {
+                if(doc.exists){
+                  const previous = doc.data().notifications
+                  const comment = {
+                    by: { id: user.uid, name: user.displayName, photo: users.profileImg, userId: users.id },
+                    created: Date.now(),
+                    userId: users.id,
+                    note: `${user.displayName} está te seguindo agora.`,
+                    visto: false,
+                  }
+                  const updatedComments = [...previous, comment]
+                  firebase.db.collection('users').doc(users.id).update({ notifications: updatedComments })
+                }
+              })
+
             
         }
     }
@@ -110,7 +126,7 @@ function Profile(props) {
                 <meta name="description" content={`This is the blog of @${users.name} created at ${format(users.created, 'dd/MM/yyyy')}.`}></meta>
             </Helmet>
             <Container className="">
-            <Card className="homecard">
+            <Card className="homecard3">
                 <Card.Body>
                     <Row>
                     <Col>
@@ -144,7 +160,7 @@ function Profile(props) {
                     ? <button style={{marginLeft: 20}} className="unFollowButton" onClick={() => unFollowUser()}>Following<img src="/img/check.png" alt="following" style={{width:14, height:16, marginLeft:3, marginBottom:3}}/></button>
                     : <button style={{marginLeft: 20}} className="followButton" onClick={() => followUser()}>Follow</button>
                     }
-                    {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button className="unFollowButton">Edit profile</button></a> : null}
+                    {user && users.email == user.email ? <a href={`/profile/${users.email}`}><button className="unFollowButton" style={{marginLeft: 20}}>Edit profile</button></a> : null}
                     </Col>
                     </Row>
                 </Card.Body>

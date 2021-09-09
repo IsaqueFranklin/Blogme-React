@@ -59,12 +59,30 @@ function ReadPost(props) {
                 ...prevState,
                 comments: updatedComments
               }))
-              setCommentText("")
+              //setCommentText("")
             }
           })
 
+          firebase.db.collection('users').doc(post.uid).get().then(doc => {
+            if(doc.exists){
+              const previous = doc.data().notifications
+              const comment = {
+                by: { id: user.uid, name: user.displayName, photo: users.profileImg, postId: post.id },
+                created: Date.now(),
+                postId: post.id,
+                comment: commentText,
+                note: `Novo comentário de ${user.displayName} no seu post '${post.title}', veja agora.`,
+                visto: false,
+              }
+              const updatedComments = [...previous, comment]
+              firebase.db.collection('users').doc(post.uid).update({ notifications: updatedComments })
+            }
+          })
+
+          setCommentText("")
+
           /*firebase.db.collection('users').doc(post.uid).update({
-              notifications: app.firestore.FieldValue.arrayUnion({ content: { type: 'comment', text: commentText, byUid: user.uid, byName: user.name, created: Date.now()}})
+              notifications: app.firestore.FieldValue.arrayUnion()
           })*/
         }
       }
@@ -105,7 +123,7 @@ function ReadPost(props) {
                     (comment.postedBy.photo === "" || comment.postedBy.photo === undefined || comment.postedBy.photo === null) ?
                     <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
                     <img src={comment.postedBy.photo} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
-                  } {comment.postedBy.name} </Link> {users.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" style={{width: 20, height: 20, marginBottom: 5}} />} <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
+                  } {comment.postedBy.name} </Link> <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
                 <div dangerouslySetInnerHTML={{ __html: comment.text }} />
                 <hr></hr>
                 <br></br>
