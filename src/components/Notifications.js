@@ -26,18 +26,29 @@ function Notifications(props) {
         }
     }
 
+    /*function handleVisto(index) {
+        return firebase.db.collection('users').doc(user.uid).get().then(doc => {
+            if(doc.exists){
+              const previous = doc.data().notifications
+              
+              const updated = [...previous]
+              const rightIndex = updated[index]
+              
+              firebase.db.collection('users').doc(post?.postedBy.id).update({ notifications: updatedComments })
+            }
+          })
+    }*/
+
 
     return !users ? (
-        <>
         <div>Loading...</div>
-        <h1>{user?.uid}</h1>
-        </>
       ) : (
+        <>
         <Container>
             <h3 style={{marginTop: 30, marginBottom: 20}}>Your notifications :)</h3>
             {users?.notifications?.sort((a, b) => a.created > b.created ? 1:-1).map((item, index) => (
                     <Card key={index} className="cardposts">
-                        <Link to={`/post/${item.postId}`}>
+                        <Link to={`/post/${item.by.postId}`}>
                         <Card.Body>
                             <Row>
                                 <Col md='auto'>
@@ -57,7 +68,11 @@ function Notifications(props) {
                         </Link>
                     </Card>
             ))}
+            <br></br>
+            <br></br>
+            <br></br>
         </Container>
+        </>
     )
 }
 

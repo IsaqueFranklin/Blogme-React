@@ -92,6 +92,7 @@ function ReadPost(props) {
       ) : (
         <Container>
             <Post post={post} />
+            <Container>
             <div className="links">
                 <h5 className="paragraph">Escreva seu comentário</h5>
                 <br></br>
@@ -110,26 +111,27 @@ function ReadPost(props) {
                     </button>
                 </div>
             </div>
-      <div className="links">
-            <br></br>
-            <br></br>
-            <h3>{post.comments.length} comments</h3>
-            <hr></hr>
-            <br></br>
-            {post.comments.map((comment, index) => (
-                <div key={index} className="">
-                <p className="comment-author" style={{fontSize: 16, fontWeight: 600}}>
-                <Link to={`/${comment.postedBy.email}`}>{
-                    (comment.postedBy.photo === "" || comment.postedBy.photo === undefined || comment.postedBy.photo === null) ?
-                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
-                    <img src={comment.postedBy.photo} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
-                  } {comment.postedBy.name} </Link> <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
-                <div dangerouslySetInnerHTML={{ __html: comment.text }} />
+          <div className="links">
+                <br></br>
+                <br></br>
+                <h3>{post.comments.length} comments</h3>
                 <hr></hr>
                 <br></br>
-                </div>
-            ))}
-        </div>
+                {post.comments.map((comment, index) => (
+                    <div key={index} className="">
+                    <p className="comment-author" style={{fontSize: 16, fontWeight: 600}}>
+                    <Link to={`/${comment.postedBy.email}`}>{
+                        (comment.postedBy.photo === "" || comment.postedBy.photo === undefined || comment.postedBy.photo === null) ?
+                        <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
+                        <img src={comment.postedBy.photo} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
+                      } {comment.postedBy.name} </Link> <small style={{fontSize: 14, fontWeight: 300,}}>| {distanceInWordsToNow(comment.created)} ago</small></p>
+                    <div dangerouslySetInnerHTML={{ __html: comment.text }} />
+                    <hr></hr>
+                    <br></br>
+                    </div>
+                ))}
+            </div>
+            </Container>
         </Container>
     )
 }

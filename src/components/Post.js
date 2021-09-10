@@ -51,7 +51,7 @@ function Post({ post, showCount, history }) {
                 if(doc.exists){
                   const previous = doc.data().notifications
                   const comment = {
-                    by: { id: user.uid, name: user.displayName, photo: myUser?.profileImg, userId: user.uid },
+                    by: { id: user.uid, name: user.displayName, photo: myUser?.profileImg, postId: post.id },
                     created: Date.now(),
                     userId: user.uid,
                     note: `${user.displayName} curtiu seu post "${post.title}".`,
@@ -106,14 +106,15 @@ function Post({ post, showCount, history }) {
             </Helmet>
             <div className="links">
                 <br></br>
-                <p>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</p>
-                <h3>{post.title}</h3>
+                <h1>{post.title}</h1>
                 <br></br>
-                <p>{
+                <p><Link to={`/${post.postedBy.email}`}>
+                    {
                     (users.profileImg === "" || undefined || null) ?
-                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginRight: 10}} /> :
-                    <img src={users.profileImg} style={{width: 40, height: 40, borderRadius: '50%', alignItems: 'center', marginBottom: 10, marginRight: 10 }} />
-                    } <Link to={`/${post.postedBy.email}`}>{post.postedBy.name}</Link></p>
+                    <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 30, height: 30, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
+                    <img src={users.profileImg} style={{width: 30, height: 30, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
+                    } {post.postedBy.name}</Link> | <small>Published {distanceInWordsToNow(post.created)} ago at {format(post.created, 'dd/MM/yyyy')}</small>
+                </p>
                 <img src={post.thumbImg} alt="" />
                 <br></br>
                 <br></br>
