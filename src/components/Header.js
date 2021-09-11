@@ -33,6 +33,8 @@ function Header() {
                         <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
                         <NavDropdown.Item href={`/${user.email}`}>My profile</NavDropdown.Item>
                         <NavDropdown.Divider />
+                        <NavDropdown.Item href="/notifications">My notifications</NavDropdown.Item>
+                        <NavDropdown.Divider />
                         <NavDropdown.Item onClick={() => firebase.logout()}>Logout</NavDropdown.Item>
                 </NavDropdown>
                     </>

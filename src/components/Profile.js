@@ -140,7 +140,6 @@ function Profile(props) {
                 <title>{users.blogName}</title>
                 <meta name="description" content={`This is the blog of @${users.name} created at ${format(users.created, 'dd/MM/yyyy')}.`}></meta>
             </Helmet>
-            <Container className="">
             <Card className="homecard3">
                 <Card.Body>
                     <Row>
@@ -180,7 +179,6 @@ function Profile(props) {
                     </Row>
                 </Card.Body>
             </Card>
-            </Container>
             <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
                 {posts.map((post) => (
                     <PostContainer key={post.id} showCount={true} post={post} />

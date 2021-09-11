@@ -200,6 +200,10 @@ a:hover{
     border: transparent;
 }
 
+img {
+    border-radius: 10px;
+}
+
 .homecard3 {
     padding: 8px;
     border-radius: 10px;
