@@ -137,7 +137,9 @@ function Home(props) {
             <br></br>
             <Row>
                 <Col>
-                <img src='/img/montanhas.png' alt="" className="blogmelogo" />
+                <img src='/img/icon.png' alt="" className="blogmelogo" style={{marginBottom: 20, height: 200, width: 200}} />
+                <br></br>
+                <br></br>
                 <h4>What's Blogme after all?</h4>
                 </Col>
                 <Col>
