@@ -131,7 +131,9 @@ function Profile(props) {
     }
 
     return !users ? (
-        <div>Loading...</div>
+        <Container style={{justifyContent: 'center', alignItems: 'center'}} className="cont">
+          <img src="https://i.stack.imgur.com/ATB3o.gif" alt="loading" style={{justifySelf: "center", alignItems: 'center', marginTop: 200, marginLeft: 50}} />
+        </Container>
       ) : (
         <>
         <Container className="cont">
