@@ -16,6 +16,7 @@ import Profile from './components/Profile'
 import Info from './components/Info'
 import Notifications from './components/Notifications'
 import Feed from './components/Feed'
+import LandingPage from './components/LandingPage'
 import './styles/style.css'
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/create' component={CreateLink} />
             <Route path='/home' component={Home} />  
-            
+            <Route path='/start' component={LandingPage} />
             <Route path='/top' component={TopPosts} />
             <Route path='/search' component={Search} />
             <Route exact path='/profile/:postId' component={Info} />

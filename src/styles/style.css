@@ -269,3 +269,70 @@ img {
     margin: 0px;
     padding: 0px;
 }
+
+/*Landing page*/
+
+.landingImg {
+    transition: 0.5s;
+    transform: rotate(20deg);
+}
+
+.landingImg:hover {
+    transform: scale(1.1);
+}
+
+.landingImg2 {
+    transition: 0.8s;
+}
+
+.landingImg2:hover {
+    transform: scale(1.3);
+}
+
+.landingImg3 {
+    transition: 0.8s;
+}
+
+.landingImg3:hover {
+    transform: scale(1.2) rotate(20deg);
+}
+
+.landingButton {
+    padding: 10px 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: transparent;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #091116;
+    transition: 0.1s;
+}
+
+.landingButton:hover {
+    background-color: transparent;
+    color: #fff;
+    transform: scale(1.06);
+}
+
+.landingButton2 {
+    padding: 10px 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px #091116 solid;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #091116;
+    transition: 0.1s;
+}
+
+.landingButton2:hover {
+    background-color: #091116;
+    color: #fff;
+    transform: scale(1.06);
+}
+
+.sol {
+    border: 1px #0a0a0a solid;
+}
