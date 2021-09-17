@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { FirebaseContext } from '../firebase'
@@ -8,6 +8,24 @@ import './header.css'
 function Header() {
 
     const {user, firebase} = React.useContext(FirebaseContext)
+    const [myUser, setMyUser] = useState("")
+
+    useEffect(() => {
+        getMyUser();
+    }, [user])
+  
+    function getMyUser() {
+        if (user) {
+            return firebase.db.collection('users').where('email', '==', user.email).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                setMyUser({...doc.data(), id: doc.id});
+              });
+            });
+          } else {
+            return null;
+        }
+    }
 
     return (
             <Navbar collapseOnSelect variant="light" fixed='top' expand="lg" sticky="top" style={{backgroundColor: "#fff"}}>
@@ -17,26 +35,31 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/">Blogme</Nav.Link>
+                <Nav.Link href="/feed">Home</Nav.Link>
+                <Nav.Link href="/">Discover</Nav.Link>
                 <Nav.Link href="/top">Top</Nav.Link>
                 <Nav.Link href="/search">Search</Nav.Link>
-                {user && (
-                    <>
-                        <Nav.Link href="/create" className="header-link">
-                        Create
-                        </Nav.Link>
-                    </>
-                    )}
 
                 {user ? (
                     <>
-                        <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
-                        <NavDropdown.Item href={`/${user.email}`}>My profile</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="/notifications">My notifications</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={() => firebase.logout()}>Logout</NavDropdown.Item>
-                </NavDropdown>
+                        <NavDropdown title={
+                            <>
+                            {
+                            (myUser.profileImg === "" || myUser.profileImg === undefined || myUser.profileImg === null) ?
+                            <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 30, height: 30, borderRadius: '50%', alignItems: 'center', marginRight: 10}} /> :
+                            <img src={myUser.profileImg} style={{width: 30, height: 30, borderRadius: '50%', alignItems: 'center', marginRight: 10 }} />
+                            }
+                            {user.displayName}
+                            </>
+                        }>
+                            <NavDropdown.Item href={`/${user.email}`}>Profile</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="/create">New post</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="/notifications">Notifications</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={() => firebase.logout()}>Logout</NavDropdown.Item>
+                        </NavDropdown>
                     </>
                     ) : <Nav.Link href="/login" className="header-link">
                     login

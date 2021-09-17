@@ -34,10 +34,12 @@ function App() {
             <Route path='/login' component={Login} />    
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/create' component={CreateLink} />
-            <Route path='/home' component={Home} />  
+            <Route path='/home' component={Home} /> 
+            
             <Route path='/start' component={LandingPage} />
             <Route path='/top' component={TopPosts} />
             <Route path='/search' component={Search} />
+            <Route path='/feed' component={Feed} /> 
             <Route exact path='/profile/:postId' component={Info} />
             <Route path='/notifications' component={Notifications} />
             <Route path='/post/:postId' component={ReadPost} />

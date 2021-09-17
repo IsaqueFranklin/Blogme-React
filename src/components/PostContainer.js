@@ -87,8 +87,9 @@ function PostContainer({ post, showCount, history }) {
     const postedByAuthUser = user && user.uid === post.postedBy.id
 
     return (
-        <Container style={{transition: "1s"}}>
-           <Link to={`/post/${post.id}`} style={{textDecoration: 'none', color: '#0a0a0a'}}> <Card className="cardposts left alig">
+        <Container>
+           <Link to={`/post/${post.id}`} style={{textDecoration: 'none', color: '#0a0a0a'}}> 
+           <Card className="cardposts left alig landingImg2" style={{transition: "0.3s"}}>
             <Row>
             <Col md="auto">
                 <img src={post.thumbImg} className="ig" />

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../firebase/context'
+import { withRouter } from 'react-router-dom'
 import PostContainer from './PostContainer'
 import { Container, Card, Row, Col } from 'react-bootstrap'
 import Footer from './Footer'
@@ -15,35 +16,39 @@ function Feed(props) {
     const [posts, setPosts] = useState([])
     const [follow, setFollow] = useState([])
     const [loading, setLoading] = useState(false)
-    const IsNewPage = props.location.pathname.includes('/home')
-    const isTopPage = props.location.pathname.includes('top');
+    
 
     useEffect(() => {
         getFeed();
-        //getFeedPosts();
-    }, [])
+    }, [user])
 
     function getFeed() {
-        firebase.db.collection('users').doc(user?.uid).get().then(doc => {
-            setFollow({...doc.data(), id: doc.id})
-        })
+        if (user?.uid) {
+            return firebase.db.collection('posts').where('whosFeed', 'array-contains', user?.uid).limit(20).get().then(snapshot => {
+                const post = snapshot.docs.map(doc => {
+                    return { id: doc.id, ...doc.data()}
+                })
+                setPosts(post)
+            })
+        } else {
+            return null
+        }
     }
 
     function getFeedPosts() {
-        firebase.db.collection('users').where('uid', '==', follow).get().then(snapshot => {
-            const posts = snapshot.docs.map(doc => {
+        firebase.db.collection('posts').where('whosFeed', 'array-contains', user?.uid).get().then(snapshot => {
+            const post = snapshot.docs.map(doc => {
                 return { id: doc.id, ...doc.data()}
             })
-            setPosts(posts)
+            setPosts(post)
         })
     }
 
-    
-
-
-
-
-    return (
+    return !posts ? (
+        <Container style={{justifyContent: 'center', alignItems: 'center'}} className="cont">
+          <img src="https://i.stack.imgur.com/ATB3o.gif" alt="loading" style={{justifySelf: "center", alignItems: 'center', marginTop: 200, marginLeft: 40}} />
+        </Container>
+      ) : (
         <>
         <Container className="">
             <Helmet>
@@ -51,43 +56,18 @@ function Feed(props) {
                 <title>Blogme</title>
                 <meta name="description" content="Start your blog today and free your toughts."></meta>
             </Helmet>
-            
-        <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
-            {/* renderLinks() ao invés de usar links */}
-            {follow?.following?.map((user) => (
-                <Card className="homecard2" key={user.id}>
-                <Card.Body>
-                <Row>
-                    <Col>
-                    {
-                   (user.profileImg === "" || undefined || null) ?
-                   <img src="https://icons-for-free.com/iconfiles/png/512/neutral+user-131964784832104677.png" alt="user" style={{width: 80, height: 80, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} /> 
-                   :
-                   <img src={user.profileImg} style={{width: 80, height: 80, borderRadius: '50%', alignItems: 'center', marginBottom: 20, marginTop: 20}} />
-                   }
-                    <h4>{user.blogName} {user.verified == true && <img src="https://img.icons8.com/fluent/48/000000/verified-badge.png" className="verified" />}</h4>
-                   <p>@{user.name}</p>
-                   <small>Since {format(user.created, 'dd/MM/yyyy')}</small>
-                    </Col>
-                    <Col md="auto">
-                        <a href={`/${user.email}`}><button>See more</button></a>
-                        <br></br>
-                        <br></br>
-                        <p style={{fontSize: 14}}>{user.followers.length}{"  "}<p style={{fontWeight: "bold", fontSize:14}}>followers</p></p>
-                    </Col>
-                </Row>
-                </Card.Body>
-            </Card>
-            ))}
-            <br></br>
-            <br></br>
-        </div>
-        
-    </Container>
-    <br></br>
-    <Footer />
-    </>
+            <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
+                <h3 style={{marginTop: 30, marginBottom: 30, marginLeft: 20}}>Posts for you today :)</h3>
+                {/* renderLinks() ao invés de usar links */}
+                {posts.map((post) => (
+                    <PostContainer key={post.id} showCount={true} post={post} />
+                ))}
+                <br></br>
+                <br></br>
+            </div>
+        </Container>
+        </>
     )
 }
 
-export default Feed
+export default withRouter(Feed)

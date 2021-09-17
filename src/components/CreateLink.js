@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import useFormValidation from '../authentication/useFormValidation'
 import validateCreateLink from '../authentication/validateCreateLink'
 import FirebaseContext from '../firebase/context'
@@ -23,6 +23,26 @@ function CreateLink(props) {
     const [textComment, setTextComment] = useState("")
     const [titlePost, setTitlePost] = useState("")
     const [coverImg, setCoverImg] = useState("")
+    const [myUser, setMyUser] = useState([])
+
+
+    useEffect(() => {
+        getMyUser();
+    }, [user])
+
+
+    function getMyUser() {
+        if (user) {
+          return firebase.db.collection('users').where('email', '==', user?.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              setMyUser({...doc.data(), id: doc.id});
+            });
+          });
+        } else {
+          return null;
+        }
+    }
 
 
     function handleCreateLink() {
@@ -44,7 +64,8 @@ function CreateLink(props) {
                 voteCount: 0,
                 votes: [],
                 comments: [],
-                created: Date.now()
+                created: Date.now(),
+                whosFeed: myUser?.followers,
             }
             firebase.db.collection('posts').add(newPost).then(function(docRef) {
                 firebase.db.collection('users').doc(user.uid).update({
