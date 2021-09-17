@@ -274,7 +274,7 @@ img {
 
 .landingImg {
     transition: 0.5s;
-    transform: rotate(20deg);
+    transform: rotate(12deg);
 }
 
 .landingImg:hover {
@@ -286,7 +286,7 @@ img {
 }
 
 .landingImg2:hover {
-    transform: scale(1.3);
+    transform: scale(1.05);
 }
 
 .landingImg3 {
@@ -294,7 +294,15 @@ img {
 }
 
 .landingImg3:hover {
-    transform: scale(1.2) rotate(20deg);
+    transform: scale(1.1) rotate(18deg);
+}
+
+.landingImg4 {
+    transition: 0.8s;
+}
+
+.landingImg4:hover {
+    transform: scale(1.1);
 }
 
 .landingButton {
