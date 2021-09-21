@@ -57,7 +57,7 @@ function Feed(props) {
                 <meta name="description" content="Start your blog today and free your toughts."></meta>
             </Helmet>
             <div style={{ opacity: loading ? 0.25 : 1}} className="fundo2">
-                <h3 style={{marginTop: 30, marginBottom: 30, marginLeft: 20}}>Posts for you today :)</h3>
+                <h3 style={{marginTop: 30, marginBottom: 30, marginLeft: 20}}>New posts for you :)</h3>
                 {/* renderLinks() ao invés de usar links */}
                 {posts.map((post) => (
                     <PostContainer key={post.id} showCount={true} post={post} />

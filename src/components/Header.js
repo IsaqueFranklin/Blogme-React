@@ -35,7 +35,9 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/feed">Home</Nav.Link>
+                {user && (
+                    <Nav.Link href="/feed">Home</Nav.Link>
+                )}
                 <Nav.Link href="/">Discover</Nav.Link>
                 <Nav.Link href="/top">Top</Nav.Link>
                 <Nav.Link href="/search">Search</Nav.Link>
